@@ -29,6 +29,10 @@ body {
 
 .cards-container {
     display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: 1000px;
+    max-width: 1200px;
 }
 
 #random-btn {
@@ -49,9 +53,42 @@ body {
     transform: translateY(10px);
     box-shadow: 0 0.1px rgb(33 33 33 / 50%);
 }
+
 #random-btn:hover {
     background: rgb(255, 105, 51);
 }
+
+#numbers-of-cards {
+    border: none;
+    border-radius: 5px;
+    margin-left: 15px;
+    width: 180px;
+    height: 30px;
+    padding: 5px;
+    outline: none;
+}
+
+#print-btn {
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+    width: 180px;
+    height: 60px;
+    outline: none;
+    background-color: OrangeRed;
+    box-shadow: 0 10px rgb(33 33 33 / 50%);
+}
+#print-btn:active {
+    outline: none;
+    transform: translateY(10px);
+    box-shadow: 0 0.1px rgb(33 33 33 / 50%);
+}
+#print-btn:hover {
+    background: rgb(255, 105, 51);
+}
+
 
 .card {
 

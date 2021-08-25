@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script defer src="js/main.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +12,13 @@
 
 <body>
     <div class="container">
-        <button id="random-btn">New Card</button>
+        <div class="input-group">
+            <button id="random-btn">Generate Cards: </button>
+            <input type="number" id="numbers-of-cards" min="0" max="54">
+        </div>
+        <button id="print-btn">Print Cards</button>
         <div class="cards-container"></div>
     </div>
-    <script src="js/main.js"></script>
 </body>
 
 </html>

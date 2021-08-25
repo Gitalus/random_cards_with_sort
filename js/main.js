@@ -1,28 +1,42 @@
 const root = document.documentElement;
 const containerCardsElement = document.querySelector('.cards-container');
+const randomBtn = document.getElementById('random-btn');
+const printBtn = document.getElementById('print-btn');
+const numberOfCards = document.getElementById('numbers-of-cards');
 
-window.onload = function() {
-    const randomBtn = document.getElementById('random-btn');
-    const customInput = document.querySelectorAll('input');
+// Array of Cards
+let arrayCards = [];
 
-    generateCard();
+// Listeners
+randomBtn.addEventListener('click', generateCards);
+printBtn.addEventListener('click', printCards);
 
-    randomBtn.addEventListener('click', generateCard);
-
+// functions
+function generateCards() {
+    if (numberOfCards.value < 1) {
+        numberOfCards.value = "";
+    } else if (numberOfCards.value > 54) {
+        numberOfCards.value = 54;
+    }
+    for (let i = 0 ; i < numberOfCards.value; i ++) {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+        const [pinta, value] = randomElements();
+        cardElement.innerHTML = value;
+        const initialCLass = cardElement.classList[1];
+        if (!initialCLass) {
+            cardElement.classList.add(pinta);
+        } else {
+            cardElement.classList.replace(initialCLass, pinta);
+        }
+        arrayCards.push(cardElement);
+    }
 }
 
-function generateCard() {
-    const cardElement = document.createElement('div');
-    cardElement.classList.add('card');
-    const [pinta, numero] = randomElements();
-    cardElement.innerHTML = numero;
-    const initialCLass = cardElement.classList[1];
-    if (!initialCLass) {
-        cardElement.classList.add(pinta);
-    } else {
-        cardElement.classList.replace(initialCLass, pinta);
-    }
-    containerCardsElement.appendChild(cardElement);
+function printCards() {
+    arrayCards.forEach((card) => {
+        containerCardsElement.appendChild(card);
+    });
 }
 
 function randomElements() {
