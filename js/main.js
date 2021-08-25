@@ -1,16 +1,17 @@
 const root = document.documentElement;
 const containerCardsElement = document.querySelector('.cards-container');
-// const randomBtn = document.getElementById('random-btn');
 const printBtn = document.getElementById('print-btn');
 const numberOfCards = document.getElementById('numbers-of-cards');
+const sortBtn = document.getElementById('sort-btn');
+const logSort = document.getElementById('sort-log');
 
 // Array of Cards
 let arrayCards = [];
 
 // Listeners
-// randomBtn.addEventListener('click', generateCards);
 numberOfCards.addEventListener('change', resetArrayCards);
 printBtn.addEventListener('click', generateCards);
+sortBtn.addEventListener('click', bubbleSortCards);
 
 
 // functions
@@ -25,23 +26,19 @@ function generateCards() {
     for (let i = 0 ; i < numberOfCards.value; i ++) {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        const [pinta, value] = randomElements();
-        cardElement.innerHTML = value;
-        const initialCLass = cardElement.classList[1];
-        if (!initialCLass) {
-            cardElement.classList.add(pinta);
-        } else {
-            cardElement.classList.replace(initialCLass, pinta);
-        }
-        arrayCards.push(cardElement);
+        const [pinta, content, value, valuePinta] = randomElements();
+        cardElement.innerHTML = content;
+        cardElement.classList.add(pinta);
+        
+        arrayCards.push({ cardElement, value, valuePinta});
     }
     printCards();
 }
 
 function printCards() {
     containerCardsElement.innerHTML = "";
-    arrayCards.forEach((card) => {
-        containerCardsElement.appendChild(card);
+    arrayCards.forEach((cardObj) => {
+        containerCardsElement.appendChild(cardObj.cardElement);
     });
 }
 
@@ -49,12 +46,57 @@ function resetArrayCards() {
     arrayCards = [];
 }
 
-
 function randomElements() {
     const arrayValue = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-    const arrayPinta = ['diamonds', 'hearts', 'spades', 'clubs'];
+    const arrayPinta = [ 'clubs', 'spades', 'diamonds', 'hearts'];
     
     const randomPinta = arrayPinta[Math.floor(Math.random() * arrayPinta.length)]
     const randomValue = arrayValue[Math.floor(Math.random() * arrayValue.length)];
-    return [randomPinta, randomValue];
+    const valueCard = arrayValue.indexOf(randomValue);
+    const valuePinta = arrayPinta.indexOf(randomPinta);
+    return [randomPinta, randomValue, valueCard, valuePinta];
+}
+
+function bubbleSortCards() {
+    logSort.innerHTML = "";
+    let wall = arrayCards.length;
+    let counter = 0;
+    while (1 < wall) {
+        let i = 1;
+        while (i < wall) {
+            if (arrayCards[i].value < arrayCards[i - 1].value) {
+                let aux = arrayCards[i];
+                arrayCards[i] = arrayCards[i - 1];
+                arrayCards[i - 1] = aux;
+                printSortedStep(counter);
+                counter++;
+            } else if (arrayCards[i].value === arrayCards[i - 1].value ) {
+                if (arrayCards[i].valuePinta < arrayCards[i - 1].valuePinta) {
+                    let aux = arrayCards[i];
+                    arrayCards[i] = arrayCards[i - 1];
+                    arrayCards[i - 1] = aux;
+                    printSortedStep(counter);
+                    counter++;
+                }
+            }
+            i++;
+        }
+        wall--;
+    }
+};
+
+function printSortedStep(paso) {
+    const newArray = arrayCards.map(objCard => {
+        const cloneCard = objCard.cardElement.cloneNode(true);
+        return cloneCard;
+    });
+    // console.log(newArray);
+    const sortStep = document.createElement('div');
+    sortStep.classList.add('flex-log');
+    const titleSort = document.createTextNode(`${paso}`);
+    sortStep.appendChild(titleSort);
+    newArray.forEach((card) => {
+        sortStep.appendChild(card);
+    });
+    logSort.appendChild(sortStep);
 }

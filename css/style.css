@@ -27,9 +27,9 @@ body {
     justify-content: flex-start;
     min-height: calc(var(--height-variable));
     padding: 20px;
-    margin: 20px 0;;
+    margin: 20px;
     width: 96vw;
-    height: 91vh;
+    min-height: 91vh;
 }
 
 .input-group {
@@ -45,11 +45,27 @@ body {
     flex-wrap: wrap;
     height: auto;
     width: 100%;
+
+}
+
+#sort-log {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+}
+
+.flex-log {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
 }
 
 button {
     width: 140px;
-    height: 60px;
+    height: 50px;
     margin: 0 15px;
     border: none;
     border-radius: 10px;
@@ -79,14 +95,13 @@ button:hover {
     border: 1px solid black;
     border-radius: 5px;
     margin:10px;
-    width: 180px;
+    width: 240px;
     height: 20px;
     padding: 20px;
     outline: none;
 }
 
 .card {
-
     align-items: center;
     background: white;
     border: 1px solid #333;
@@ -99,7 +114,6 @@ button:hover {
     margin: 10px;
     width: var(--width-variable);
     height: var(--height-variable);
-
 }
 
 /* Cards */
