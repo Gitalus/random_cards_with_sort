@@ -1,6 +1,6 @@
 const root = document.documentElement;
 const containerCardsElement = document.querySelector('.cards-container');
-const randomBtn = document.getElementById('random-btn');
+// const randomBtn = document.getElementById('random-btn');
 const printBtn = document.getElementById('print-btn');
 const numberOfCards = document.getElementById('numbers-of-cards');
 
@@ -8,11 +8,15 @@ const numberOfCards = document.getElementById('numbers-of-cards');
 let arrayCards = [];
 
 // Listeners
-randomBtn.addEventListener('click', generateCards);
-printBtn.addEventListener('click', printCards);
+// randomBtn.addEventListener('click', generateCards);
+numberOfCards.addEventListener('change', resetArrayCards);
+printBtn.addEventListener('click', generateCards);
+
 
 // functions
+
 function generateCards() {
+    resetArrayCards();
     if (numberOfCards.value < 1) {
         numberOfCards.value = "";
     } else if (numberOfCards.value > 30) {
@@ -31,13 +35,20 @@ function generateCards() {
         }
         arrayCards.push(cardElement);
     }
+    printCards();
 }
 
 function printCards() {
+    containerCardsElement.innerHTML = "";
     arrayCards.forEach((card) => {
         containerCardsElement.appendChild(card);
     });
 }
+
+function resetArrayCards() {
+    arrayCards = [];
+}
+
 
 function randomElements() {
     const arrayValue = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
