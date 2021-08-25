@@ -3,14 +3,10 @@ window.onload = function() {
     const randomBtn = document.getElementById('random-btn');
     const customInput = document.querySelectorAll('input');
 
-    customInput[0].addEventListener('change', changeWidth);
-    customInput[1].addEventListener('change', changeHeight);
-
     generateCard();
 
     randomBtn.addEventListener('click', generateCard);
 
-    setInterval(generateCard, 10000);
 }
 
 function generateCard() {
@@ -32,22 +28,4 @@ function randomElements() {
     const randomPinta = arrayPinta[Math.floor(Math.random() * arrayPinta.length)]
     const randomValue = arrayValue[Math.floor(Math.random() * arrayValue.length)];
     return [randomPinta, randomValue];
-}
-
-function changeWidth(event) {
-    if (event.target.value < 300) {
-        event.target.value = "";
-        root.style.setProperty('--width-variable', '300px');
-    } else {
-        root.style.setProperty('--width-variable', event.target.value + 'px');
-    }
-}
-
-function changeHeight(event) {
-    if (event.target.value < 450) {
-        event.target.value = "";
-        root.style.setProperty('--height-variable', '450px');
-    } else {
-        root.style.setProperty('--height-variable', event.target.value + 'px');
-    }
 }
