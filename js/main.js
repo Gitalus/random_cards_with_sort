@@ -15,8 +15,8 @@ printBtn.addEventListener('click', printCards);
 function generateCards() {
     if (numberOfCards.value < 1) {
         numberOfCards.value = "";
-    } else if (numberOfCards.value > 54) {
-        numberOfCards.value = 54;
+    } else if (numberOfCards.value > 30) {
+        numberOfCards.value = 30;
     }
     for (let i = 0 ; i < numberOfCards.value; i ++) {
         const cardElement = document.createElement('div');
