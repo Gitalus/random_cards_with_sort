@@ -1,1 +1,1 @@
-# Generate Random Cards and Sort them with BUBBLE_SORT
+# Generate Random Cards and Sort them with BUBBLE SORT
