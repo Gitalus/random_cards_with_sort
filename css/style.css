@@ -116,6 +116,11 @@ button:hover {
     height: var(--height-variable);
 }
 
+.log-text {
+    font-size: 50px;
+    text-align: center;
+}
+
 /* Cards */
 
 .hearts::before {

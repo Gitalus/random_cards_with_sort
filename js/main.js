@@ -5,19 +5,22 @@ const numberOfCards = document.getElementById('numbers-of-cards');
 const sortBtn = document.getElementById('sort-btn');
 const logSort = document.getElementById('sort-log');
 
-// Array of Cards
+// Var for functionality
 let arrayCards = [];
+let sorted = false;
 
 // Listeners
 numberOfCards.addEventListener('change', resetArrayCards);
 printBtn.addEventListener('click', generateCards);
-sortBtn.addEventListener('click', bubbleSortCards);
+sortBtn.addEventListener('click', sortElements);
 
 
 // functions
 
 function generateCards() {
+
     resetArrayCards();
+    logSort.innerHTML = "";
     if (numberOfCards.value < 1) {
         numberOfCards.value = "";
     } else if (numberOfCards.value > 30) {
@@ -43,6 +46,7 @@ function printCards() {
 }
 
 function resetArrayCards() {
+    sorted = false;
     arrayCards = [];
 }
 
@@ -57,10 +61,18 @@ function randomElements() {
     return [randomPinta, randomValue, valueCard, valuePinta];
 }
 
+function sortElements() {
+    if (!sorted && numberOfCards.value) {
+        logSort.innerHTML = "";
+        bubbleSortCards();
+        sorted = true;
+    }
+}
+
 function bubbleSortCards() {
-    logSort.innerHTML = "";
     let wall = arrayCards.length;
     let counter = 0;
+    printSortedStep(counter);
     while (1 < wall) {
         let i = 1;
         while (i < wall) {
@@ -68,15 +80,15 @@ function bubbleSortCards() {
                 let aux = arrayCards[i];
                 arrayCards[i] = arrayCards[i - 1];
                 arrayCards[i - 1] = aux;
-                printSortedStep(counter);
                 counter++;
+                printSortedStep(counter);
             } else if (arrayCards[i].value === arrayCards[i - 1].value ) {
                 if (arrayCards[i].valuePinta < arrayCards[i - 1].valuePinta) {
                     let aux = arrayCards[i];
                     arrayCards[i] = arrayCards[i - 1];
                     arrayCards[i - 1] = aux;
-                    printSortedStep(counter);
                     counter++;
+                    printSortedStep(counter);
                 }
             }
             i++;
@@ -90,11 +102,13 @@ function printSortedStep(paso) {
         const cloneCard = objCard.cardElement.cloneNode(true);
         return cloneCard;
     });
-    // console.log(newArray);
     const sortStep = document.createElement('div');
+    const h1Log = document.createElement('h1');
     sortStep.classList.add('flex-log');
     const titleSort = document.createTextNode(`${paso}`);
-    sortStep.appendChild(titleSort);
+    h1Log.classList.add('log-text');
+    h1Log.appendChild(titleSort);
+    sortStep.appendChild(h1Log);
     newArray.forEach((card) => {
         sortStep.appendChild(card);
     });
