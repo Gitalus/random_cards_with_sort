@@ -1,4 +1,6 @@
 const root = document.documentElement;
+const containerCardsElement = document.querySelector('.cards-container');
+
 window.onload = function() {
     const randomBtn = document.getElementById('random-btn');
     const customInput = document.querySelectorAll('input');
@@ -10,7 +12,8 @@ window.onload = function() {
 }
 
 function generateCard() {
-    const cardElement = document.querySelector('.card');
+    const cardElement = document.createElement('div');
+    cardElement.classList.add('card');
     const [pinta, numero] = randomElements();
     cardElement.innerHTML = numero;
     const initialCLass = cardElement.classList[1];
@@ -19,6 +22,7 @@ function generateCard() {
     } else {
         cardElement.classList.replace(initialCLass, pinta);
     }
+    containerCardsElement.appendChild(cardElement);
 }
 
 function randomElements() {

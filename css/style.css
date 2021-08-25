@@ -27,9 +27,8 @@ body {
     height: calc(var(--height-variable) + 350px);
 }
 
-input[type="number"] {
-    width: 100px;
-    height: 20px;
+.cards-container {
+    display: flex;
 }
 
 #random-btn {
